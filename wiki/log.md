@@ -32,3 +32,21 @@
 實際執行：AAPOR 網頁下載回傳 HTTP 403，改取其網頁所連結的同一指南官方 PDF，取得 HTTP 200。網路閱讀工具確認 PDF 為 9 頁，標題、版本及指定章節存在；本機檢查 PDF 標頭與檔案大小。OpenStax 官方頁取得 HTTP 200，本機解析出章節標題及潛在變數說明。
 
 邊界：SRC-03 的 PDF 未在本機逐頁抽取文字，章節位置由網路閱讀工具核對。CASE-03、04 只有初步概念覆蓋；沒有把模擬案例當成來源數據。
+
+## INGEST-B03｜2026-11-24（臺北時間）
+
+| Source ID | 原文快照與大小 | SHA-256 | 驗收結果 |
+|---|---|---|---|
+| SRC-04 | `raw/SRC-04-openintro-ahss4.pdf`，13,271,512 bytes | `79cb40dd30bb5ae0ad323a2b8bffb4f26465abfd586cbd3c94968f9cb832480d` | 原文已取得；指定章節文字尚未核對，未計為成功 Ingest |
+| SRC-06 | `raw/SRC-06-psu-simpson.html`，28,708 bytes | `88d479854af7c167c171bf9dcbd7f7d4be849510d84cc9694feb0bd9e71d9f49` | 成功 Ingest；STAT-05-01／EVID-05-01 |
+| SRC-07 | `raw/SRC-07-sinica-simpson.pdf`，334,346 bytes | `7263c6153e3904894dbc35a2204c3c8fbf54e27136b64aa3b8bc51e2c35861de` | 原文已取得；全文核對尚未完成，未計為成功 Ingest |
+
+實際執行：SRC-06 的 Python HTTPS 請求遇到憑證鏈驗證失敗；改用 Windows 內建憑證驗證的 `Invoke-WebRequest` 取得 HTTP 200，未停用憑證檢查。SRC-04、SRC-07 PDF 均具 `%PDF-` 標頭與結尾標記；但本機目前沒有 PDF 文字擷取套件，SRC-04 又超過網路閱讀工具的檔案大小限制。故只保存原始檔並標示待核對，沒有憑檔案存在就宣稱成功 Ingest。SRC-06 HTML 已可解析出指定段落及完整腎結石分組表。
+
+累計成功 Ingest 的獨立來源為 SRC-01、02、03、05、06，共 5 份；五案均有初步知識覆蓋。SRC-04、07 仍需後續驗證。
+
+### INGEST-B03 補充核對
+
+使用安裝於系統暫存目錄的 PDF 文字讀取工具，核對 SRC-04 為第四版、478 頁，1.6.2 的自願回覆偏差文字位於 PDF 第 72 頁；新增 STAT-03-02／EVID-03-02。SRC-07 為 6 頁 PDF，對應期刊頁 64–69；本機中文字擷取有編碼缺損，因此只依該官方 PDF 可檢索的首頁表格與加權公式建立 STAT-05-02／EVID-05-02。兩份來源改列為**限定範圍成功 Ingest**。累計 7 份獨立來源；未核對的其他章節與段落不作教學依據。
+
+SRC-04 的實際下載入口為 `https://openintro.org/go?id=ahss4_direct_download`，由該書官方介紹頁連結；僅下載原始 PDF 一份，沒有把章節重複計為多篇來源。
