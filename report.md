@@ -2,7 +2,7 @@
 
 ## 目前成果
 
-七份獨立來源已分三批 Ingest；`sources.md`、`raw/`、`wiki/` 和 `cards/` 建立了 Source ID → Concept ID → Evidence ID → Slide ID → Test ID 的追溯骨架。`outline.md` 已獲使用者確認；`site/index.html` 提供 14 張主要投影片、五宗案件互動、10 題測驗（五題單案、五題跨案）、電子認證與 Local Storage。`site/lab.html` 是獨立幕後調查室。所有案件數據在 `cases/simulation.md` 標為教學模擬。
+七份獨立來源已分三批 Ingest；`sources.md`、`raw/`、`wiki/` 和 `cards/` 建立了 Source ID → Concept ID → Evidence ID → Slide ID → Test ID 的追溯骨架。`outline.md` 已獲使用者確認；`site/index.html` 提供 14 張主要投影片、五宗案件互動、10 題測驗（五題單案、五題跨案）、電子認證與 Local Storage。`site/lab.html` 是獨立幕後調查室。所有案件數據在 `cases/simulation.md` 標為教學模擬。CASE-04 的 Pearson r 依已核准 OpenIntro 教材 5.1.3 新增限定範圍的 Wiki 證據。
 
 ## 執行與驗證
 
@@ -15,7 +15,7 @@ V1 的互動檢查發現真實的解鎖頁碼錯誤。V2 把解鎖映射納入�
 ## 尚未完成的驗收
 
 1. 瀏覽器工具的安全政策拒絕本機 `file:` URL，故尚無真實瀏覽器的桌面／手機視覺與操作紀錄。DOM 測試不能取代排版檢查。
-2. 尚未取得獨立審查者或新對話對成品與來源的內容審查。
+2. 獨立內容審查及修正後複核已完成，未發現阻擋交付的內容問題，見 `test-results/INDEPENDENT-REVIEW.md`；審查不涵蓋實際瀏覽器畫面。
 3. GitHub Pages 尚未部署；需要功能與驗收補齊後由使用者明確授權。沒有公開網址可宣稱通過。
 
 ## 本機執行

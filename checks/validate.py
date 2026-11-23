@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from html.parser import HTMLParser
 from pathlib import Path
@@ -37,6 +38,11 @@ def run() -> dict[str, bool]:
     deck.feed(html)
     lab.feed(lab_html)
     salary = [40, 45, 50, 55, 400]
+    ice, drowning = [40, 50, 65, 80], [2, 3, 5, 6]
+    mx, my = mean(ice), mean(drowning)
+    correlation = sum((x - mx) * (y - my) for x, y in zip(ice, drowning)) / math.sqrt(
+        sum((x - mx) ** 2 for x in ice) * sum((y - my) ** 2 for y in drowning)
+    )
     rates = [(19, 20), (80, 100), (2, 10), (1, 10), (21, 30), (81, 110)]
     ids = set(re.findall(r"EVID-\d\d-\d\d", html + js))
     question_block = js.split("const questions=[", 1)[1].split("\n];", 1)[0]
@@ -59,6 +65,7 @@ def run() -> dict[str, bool]:
         "score_rules": all(s in js for s in ["score>=90", "score>=70", "score>=60", "state.bestScore", "state.lastScore"]),
         "growth_rate": round((100 - 95) / 95 * 100, 2) == 5.26,
         "mean_and_median": mean(salary) == 118 and median(salary) == 50,
+        "case_04_correlation": round(correlation, 2) == 0.99,
         "case_05_totals": rates[0][0] + rates[2][0] == rates[4][0] and rates[0][1] + rates[2][1] == rates[4][1] and rates[1][0] + rates[3][0] == rates[5][0] and rates[1][1] + rates[3][1] == rates[5][1],
         "simpson_reversal": rates[0][0] / rates[0][1] > rates[1][0] / rates[1][1] and rates[2][0] / rates[2][1] > rates[3][0] / rates[3][1] and rates[4][0] / rates[4][1] < rates[5][0] / rates[5][1],
         "relative_local_links": all(not h.startswith("/") for h in deck.links if not h.startswith(("http:", "https:", "#"))),
