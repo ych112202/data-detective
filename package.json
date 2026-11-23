@@ -1,0 +1,11 @@
+{
+  "name": "data-detective",
+  "private": true,
+  "scripts": {
+    "check:js": "node --check site/app.js",
+    "check:interaction": "node checks/interaction.cjs"
+  },
+  "devDependencies": {
+    "jsdom": "29.1.1"
+  }
+}
